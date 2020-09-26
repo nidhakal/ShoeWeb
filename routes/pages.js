@@ -1,16 +1,14 @@
-const { Router } = require('express');
 const express = require('express');
 
-const rounter = express.Router();
+const router = express.Router();
 
-Router.length('/', (req,res)=>{
-    res.render('render');
-
+router.get('/', (req,res)=>{
+    res.render('index');
 });
-Router.length('/'register, (req,res)=>{
+
+router.get('/register', (req,res)=>{
     res.render('register');
-    
 });
 
-module.expoets = router;
+module.exports = router;
 
