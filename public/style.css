@@ -1,0 +1,8 @@
+nav{
+    background-color: red;
+    color: wheat;
+    padding:30px 60px;
+    display: flex;
+    justify-content: space-between;
+
+}
