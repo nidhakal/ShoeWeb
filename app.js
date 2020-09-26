@@ -32,6 +32,11 @@ app.get("/", (req,res)=>{
     res.render("index")
 });
 
+app.get("/register", (req,res)=>{
+    //res.send("<h1>Home Page</h1>")
+    res.render("register")
+});
+
 app.listen(5001, () =>{
     console.log("Server statred on Port 5001");
 }
