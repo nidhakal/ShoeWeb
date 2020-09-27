@@ -11,11 +11,11 @@
 </head>
 <body>
   <nav>
-    <h4>Shoe-On</h4>
+    <h4>Shoes-On</h4>
     <ul>
       <li><a href ="/">Home</a></li>
-      <li><a href ="/login">Login</a></li>
-      <li><a href ="/register">Register</a></li>
+      <li><a href ="/profile">Profile</a></li>
+      <li><a href ="/auth/logout">Logout</a></li>
 
     </ul>
   </nav>
@@ -28,9 +28,9 @@
             <img src ="/user.png" class ="avatar" alt ="user profile picture">
         </div>
         <div class="card-body">
-            <h5 class ="card-title">Sponge Bob</h5>
+            <h5 class ="card-title">{{user.name}}</h5>
             <p class="card-text">Hello I am from Bikini Bottom. </p>
-            <a href ='#' class= "btn btn-primary">sponge@bob.com</a>
+            <a href ='#' class= "btn btn-primary">{{user.email}}</a>
         </div> 
         </div>
         </div>
@@ -42,14 +42,13 @@
               </div>
               <div class="card-body">
                   <h5 class="card-title">
-                      Hey Sponge, welcome back!!!!!!
+                      Hey {{user.name}}, welcome back!
                   </h5>
                   <p class="class">This is your proile, with all your info</p>
                   <a href ="#" class="btn btn-primary">Go Somewhere</a>
               </div>
               <div class="card-footer text-muted">
                   Shoes-On
-
               </div>
           </div>  
         </div>

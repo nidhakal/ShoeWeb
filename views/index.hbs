@@ -14,9 +14,13 @@
     <h4>Shoes-On</h4>
     <ul>
       <li><a href ="/">Home</a></li>
-      <li><a href ="/login">Login</a></li>
-      <li><a href ="/register">Register</a></li>
-
+      {{#if user}}
+        <li><a href ="/profile">Profile</a></li>
+        <li><a href ="/auth/logout">Logout</a></li>
+      {{else}}
+          <li><a href ="/login">Login</a></li>
+          <li><a href ="/register">Register</a></li>
+      {{/if}}
     </ul>
   </nav>
 

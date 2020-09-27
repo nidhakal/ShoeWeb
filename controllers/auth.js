@@ -1,6 +1,7 @@
 const mysql = require("mysql");
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcryptjs");
+const { promisify } = require('util');
 
 const db = mysql.createConnection({
     host: process.env.DATABASE_HOST,
@@ -37,7 +38,7 @@ exports.login = async (req, res) => {
 
                 const cookieOptions = {
                     expires : new Date(
-                        Date.now() + process.env.JWT_COOKIE_EXPIRES * 24 * 60 * 60
+                        Date.now() + process.env.JWT_COOKIE_EXPIRES * 24 * 60 * 60 * 1000
                     ),
                     httpOnly: true
                 }
@@ -90,4 +91,47 @@ exports.register = (req, res) => {
 
 
     });
+}
+
+exports.isLoggedIn = async (req, res, next) =>{
+    //console.log(req.cookies);
+    if(req.cookies.jwt){
+        try{
+            //1)verfiy token
+            const decoded = await promisify(jwt.verify)(req.cookies.jwt, process.env.JWT_SECRET);
+            console.log(decoded);
+
+            //Check if the user exists
+            db.query('SELECT * FROM Users WHERE id = ?',[decoded.id], (error,result) =>{
+                console.log(result);
+
+                if(!result){
+                    return next();
+                }
+
+                req.user = result[0];
+                return next();
+            });
+            
+
+
+        }catch (error){
+            console.log(error)
+            return next();
+
+        }
+
+        }else{
+            next();
+        }
+    
+}
+
+exports.logout = async (req,res)=>{
+    res.cookie('jwt', 'logout',{
+        expires: new Date(Date.now() + 2 * 1000),
+        httpOnly: true
+    });
+    
+    res.status(200).redirect('/');
 }
