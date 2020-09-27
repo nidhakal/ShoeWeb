@@ -3,6 +3,7 @@ const path = require('path');
 const mysql = require("mysql");
 const dotenv = require('dotenv');
 dotenv.config({path:'./.env'});
+const cookieParser = require("cookie-parser");
 
 const app = express();
 
@@ -22,6 +23,7 @@ app.use(express.static(publicDirectory));
 app.use(express.urlencoded({ extended: false}));
 // Parse JSON bodies (as sent byt API clients)
 app.use(express.json());
+app.use(cookieParser());
 
 app.set('view engine', 'hbs')
 
